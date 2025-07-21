@@ -38,6 +38,7 @@ This project is ideal for smart home applications, energy-efficient HVAC systems
 - **Pandas & NumPy** – For data manipulation and preparation
 - **Requests** – For OpenWeather API calls
 - **OpenWeather API** – For fetching outdoor weather data
+- **Python-dotenv** – For environment variable management
 
 > ![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=FFFF00)
 > ![Firebase](https://img.shields.io/badge/firebase-%23FFCA28.svg?logo=firebase&logoColor=black)
@@ -82,21 +83,17 @@ A small sample of the dataset is included in the project description for referen
 ### ✅ Requirements
 
 - Python 3.10+
-- Firebase Admin SDK: `pip install firebase-admin`
-- Joblib: `pip install joblib`
-- Pandas: `pip install pandas`
-- NumPy: `pip install numpy`
-- Requests: `pip install requests`
-- Pre-trained ML model (`ac_model.pkl`)
-- Firebase credentials JSON file (`airvix-ef027-firebase-adminsdk-fbsvc-18f86681a5.json`)
+- All dependencies listed in `requirements.txt`
+- Firebase Admin SDK credentials
 - OpenWeather API key
+- Pre-trained ML model (`ac_model.pkl`)
 
 ### 🔐 Setup Instructions
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/SahanUday/SmartClimateAI.git
-   cd SmartClimateAI
+   git clone https://github.com/SahanUday/AI-Powered-AC-Temperature-Prediction-System.git
+   cd AI-Powered-AC-Temperature-Prediction-System
    ```
 
 2. **Install Dependencies**:
@@ -104,37 +101,90 @@ A small sample of the dataset is included in the project description for referen
    pip install -r requirements.txt
    ```
 
-3. **Set Up Firebase**:
-   - Place your Firebase credentials JSON file (`airvix-ef027-firebase-adminsdk-fbsvc-18f86681a5.json`) in the project root.
-   - Ensure the Firebase Realtime Database URL is correctly configured in the code.
-
-4. **Set Up OpenWeather API Key**:
-   - Replace the `API_KEY` in the code with your OpenWeather API key:
-     ```python
-     API_KEY = "your_openweather_api_key_here"
+3. **Set Up Environment Variables**:
+   - Copy the environment template:
+     ```bash
+     cp .env.template .env
+     ```
+   - Edit `.env` file and add your actual values:
+     ```
+     OPENWEATHER_API_KEY=your_openweather_api_key_here
+     LATITUDE=your_latitude
+     LONGITUDE=your_longitude
+     FIREBASE_CREDENTIALS_PATH=your_firebase_credentials.json
+     FIREBASE_DATABASE_URL=https://your-project-default-rtdb.region.firebasedatabase.app/
      ```
 
-5. **Place the ML Model**:
+4. **Set Up Firebase Credentials**:
+   - Download your Firebase Admin SDK service account JSON file from Firebase Console
+   - Save it in your project directory (the filename should match `FIREBASE_CREDENTIALS_PATH` in your `.env`)
+   - **Important**: This file contains sensitive data and should NEVER be committed to version control
+
+5. **Get OpenWeather API Key**:
+   - Sign up at [OpenWeatherMap](https://openweathermap.org/api)
+   - Get your free API key
+   - Add it to your `.env` file
+
+6. **Place the ML Model**:
    - Ensure the pre-trained model file (`ac_model.pkl`) is in the project root.
 
-6. **Run the Project**:
+7. **Run the Project**:
    ```bash
    python main.py
    ```
 
-   The script will run continuously, fetching data, making predictions, and updating Firebase every 20 seconds.
+   The script will fetch data from Firebase and OpenWeather API, make predictions, and update Firebase with the results.
 
 ---
 
 ## 📜 Project Structure
 
 ```
-SmartClimateAI/
-├── main.py                    # Main script with ML prediction logic
-├── ac_model.pkl              # Pre-trained ML model
-├── airvix-ef027-firebase-adminsdk-fbsvc-18f86681a5.json  # Firebase credentials
-├── requirements.txt           # Python dependencies
-├── README.md                 # Project documentation
+AI-Powered-AC-Temperature-Prediction-System/
+├── main.py               # Main script with ML prediction logic
+├── ac_model.pkl                  # Pre-trained ML model
+├── requirements.txt              # Python dependencies
+├── .env.template                 # Environment variables template
+├── firebase-config-template.json # Firebase credentials template
+├── .gitignore                    # Git ignore rules (protects sensitive files)
+├── README.md                     # Project documentation
+└── .env                          # Your environment variables 
+```
+
+### 🔒 **Important Files (Not in Repository)**:
+- `.env` - Your actual environment variables with API keys
+- `your_firebase_credentials.json` - Your Firebase service account file
+
+These files are automatically excluded by `.gitignore` to protect your sensitive data.
+
+## 🔐 Security Features
+
+This project implements several security best practices:
+
+- **Environment Variables**: All sensitive data (API keys, database URLs) stored in `.env` file
+- **Template Files**: Safe templates provided for configuration without exposing real credentials
+- **Git Ignore**: Comprehensive `.gitignore` prevents accidental commit of sensitive files
+- **No Hardcoded Secrets**: No API keys or credentials hardcoded in source code
+- **Service Account**: Uses Firebase service account for secure database access
+
+## 🚀 Usage
+
+1. **First Run**: The script will validate your environment configuration
+2. **Data Fetching**: Retrieves indoor sensor data from Firebase
+3. **Weather Data**: Fetches outdoor conditions from OpenWeather API
+4. **ML Prediction**: Uses the trained model to predict optimal AC temperature
+5. **Firebase Update**: Writes prediction and environmental data back to Firebase
+
+## 📊 Sample Output
+
+```
+From Firebase -> Temp: 26.5°C, Humidity: 65%
+From Firebase -> activity_type: Relaxing, status: Comfortable
+From OpenWeather -> Outdoor Temp: 28.3°C, Outdoor Humidity: 78%, Weather: Clear, Hour: 14
+
+🎯 Predicted AC Set Temperature: 24.2°C
+
+✅ Written to Firebase: /sensor_data/ai_set_temp -> cool_24
 ```
 
 ---
@@ -146,10 +196,19 @@ Contributions are welcome! Potential enhancements include:
 - 🧠 Improving the ML model with more features
 - 🖥️ Building a web dashboard for monitoring
 - 🔌 Integrating with IoT devices for direct AC control
+- 🔒 Adding authentication and user management
+- 📱 Creating a mobile app interface
 
-To contribute:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -m "Add your feature"`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Submit a pull request.
+### Contributing Guidelines:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. **Never commit sensitive files** (`.env`, credentials)
+4. Test your changes thoroughly
+5. Commit your changes (`git commit -m "Add your feature"`)
+6. Push to the branch (`git push origin feature/your-feature`)
+7. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
