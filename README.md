@@ -76,7 +76,6 @@ A small sample of the dataset is included in the project description for referen
 3. **Data Preparation**: Combines sensor and weather data into a format compatible with the ML model.
 4. **Prediction**: Uses the pre-trained model to predict the optimal AC set temperature.
 5. **Firebase Update**: Writes the predicted temperature and environmental data back to Firebase.
-6. **Continuous Loop**: Repeats every 20 seconds to ensure real-time adjustments.
 
 ---
 
@@ -149,25 +148,8 @@ AI-Powered-AC-Temperature-Prediction-System/
 ├── .env.template                 # Environment variables template
 ├── firebase-config-template.json # Firebase credentials template
 ├── .gitignore                    # Git ignore rules (protects sensitive files)
-├── README.md                     # Project documentation
-└── .env                          # Your environment variables 
+└── README.md                     # Project documentation
 ```
-
-### 🔒 **Important Files (Not in Repository)**:
-- `.env` - Your actual environment variables with API keys
-- `your_firebase_credentials.json` - Your Firebase service account file
-
-These files are automatically excluded by `.gitignore` to protect your sensitive data.
-
-## 🔐 Security Features
-
-This project implements several security best practices:
-
-- **Environment Variables**: All sensitive data (API keys, database URLs) stored in `.env` file
-- **Template Files**: Safe templates provided for configuration without exposing real credentials
-- **Git Ignore**: Comprehensive `.gitignore` prevents accidental commit of sensitive files
-- **No Hardcoded Secrets**: No API keys or credentials hardcoded in source code
-- **Service Account**: Uses Firebase service account for secure database access
 
 ## 🚀 Usage
 
@@ -199,7 +181,6 @@ Contributions are welcome! Potential enhancements include:
 - 🖥️ Building a web dashboard for monitoring
 - 🔌 Integrating with IoT devices for direct AC control
 - 🔒 Adding authentication and user management
-- 📱 Creating a mobile app interface
 
 ### Contributing Guidelines:
 1. Fork the repository
