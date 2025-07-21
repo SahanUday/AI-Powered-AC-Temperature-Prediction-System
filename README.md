@@ -2,6 +2,8 @@
 
 **AI-Powered AC Temperature Prediction System** is an intelligent air conditioner temperature predicting system that optimizes indoor temperature settings using machine learning, real-time sensor data, and external weather conditions. Developed in Python, it integrates with Firebase for data storage and retrieval, and uses the OpenWeather API to fetch outdoor weather conditions. The system predicts optimal AC set temperatures based on indoor conditions, user feedback, and environmental factors.
 
+This app is one of my contributions to our group project, the **Smart-AC-Control-System**, which encompasses a broader system for controlling AC units, including gathering indoor and outdoor sensor data, checking occupancy, predicting optimal AC set temperatures using AI models, and automating an exhaust fan system etc. For more details on the main project, visit the repository at [Smart-AC-Control-System](https://github.com/SahanUday/Smart-AC-Control-System.git).
+
 ---
 
 ## 📌 Overview
