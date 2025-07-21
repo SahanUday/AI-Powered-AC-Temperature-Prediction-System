@@ -207,8 +207,3 @@ Contributions are welcome! Potential enhancements include:
 5. Commit your changes (`git commit -m "Add your feature"`)
 6. Push to the branch (`git push origin feature/your-feature`)
 7. Submit a pull request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
