@@ -1,6 +1,6 @@
 # 🌬️ AI-Powered AC Temperature Prediction System
 
-**AI-Powered AC Temperature Prediction System** is an intelligent air conditioning control system that optimizes indoor temperature settings using machine learning, real-time sensor data, and external weather conditions. Developed in Python, it integrates with Firebase for data storage and retrieval, and uses the OpenWeather API to fetch outdoor weather conditions. The system predicts optimal AC set temperatures based on indoor conditions, user feedback, and environmental factors.
+**AI-Powered AC Temperature Prediction System** is an intelligent air conditioner temperature predicting system that optimizes indoor temperature settings using machine learning, real-time sensor data, and external weather conditions. Developed in Python, it integrates with Firebase for data storage and retrieval, and uses the OpenWeather API to fetch outdoor weather conditions. The system predicts optimal AC set temperatures based on indoor conditions, user feedback, and environmental factors.
 
 ---
 
